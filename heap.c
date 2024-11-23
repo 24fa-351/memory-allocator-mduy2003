@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[]) {
-    printf("Hello, World!\n");
-    return 0;
+#include "heap.h"
+
+void* get_me_blocks(ssize_t how_much)
+{
+    void* ptr = sbrk(0);
+    sbrk(how_much);
+    return ptr;
 }
