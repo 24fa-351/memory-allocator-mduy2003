@@ -1,13 +1,19 @@
 #ifndef HEAP_H
 #define HEAP_H
 
-#include <stdlib.h>
+#include <stddef.h>
 
-void* get_me_blocks(ssize_t how_much);
+typedef struct block_header {
+    size_t size;
+    int is_free;
+    struct block_header* next;
+} block_header;
 
-void* malloc();
+block_header* find_free_block(size_t size);
+void split_block(block_header* block, size_t size);
+void initialize_heap();
+void* malloc(size_t size);
+void free(void* ptr);
+void* realloc(void* ptr, size_t size);
 
-void* free();
-
-void* realloc();
 #endif
